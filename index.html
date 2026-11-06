@@ -3,75 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#101815" />
-  <meta name="description" content="Task Console — painel pessoal de tarefas." />
-  <title>TASK CONSOLE // DEV SYSTEMS</title>
+  <meta name="theme-color" content="#171716" />
+  <meta name="description" content="Task Console — central de operações pessoais." />
+  <title>OPS DECK // TASK CONTROL</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
   <link rel="stylesheet" href="./src/css/styles.css" />
   <script src="./src/js/index.js" defer></script>
 </head>
 <body>
-  <div class="scanlines" aria-hidden="true"></div>
-  <header class="topbar">
-    <a class="brand" href="./" aria-label="Task Console início">
-      <span class="brand-mark"><i class="bi bi-list-check"></i></span>
-      <span class="brand-name">TASK<span>CONSOLE</span><small>PERSONAL OPERATIONS MODULE</small></span>
-    </a>
-    <div class="system-status"><span class="status-light"></span><span>WORKFLOW ONLINE</span><span class="status-divider">/</span><span class="system-version">TC-02</span></div>
-    <div class="top-meta"><span><i class="bi bi-hdd-stack"></i> LOCAL STORAGE</span><span><i class="bi bi-shield-check"></i> PRIVATE</span></div>
+  <div class="screen-grain" aria-hidden="true"></div>
+  <header class="console-header">
+    <a class="unit-id" href="./" aria-label="Ops Deck início"><span class="unit-symbol"><i class="bi bi-crosshair"></i></span><span>OPS DECK<small>PERSONAL TASK MANAGEMENT</small></span></a>
+    <div class="header-center"><span class="live-dot"></span> CONTROL LINK ESTABLISHED <b>///</b> STATION 02</div>
+    <div class="header-clock"><span>LOCAL ARCHIVE</span><i class="bi bi-database-check"></i></div>
   </header>
 
-  <main class="workspace">
-    <section class="hero">
-      <div>
-        <p class="eyebrow"><span>SYS.TASK</span> / DAILY OPERATIONS / 002</p>
-        <h1>Task <em>control</em><span class="title-cursor">_</span></h1>
-        <p class="hero-description">Organize suas operações, acompanhe o progresso e mantenha cada tarefa em seu devido lugar.</p>
+  <main class="deck-layout">
+    <aside class="side-console">
+      <div class="side-label">OPERATIONS MENU <span>01—03</span></div>
+      <div class="side-nav active"><i class="bi bi-grid-1x2-fill"></i><span>MISSION BOARD</span><b>ACTIVE</b></div>
+      <div class="side-nav"><i class="bi bi-inbox"></i><span>TASK INTAKE</span></div>
+      <div class="side-nav"><i class="bi bi-archive"></i><span>LOCAL ARCHIVE</span></div>
+
+      <div class="side-divider"></div>
+      <div class="side-label">SYSTEM TELEMETRY</div>
+      <div class="telemetry-card">
+        <span class="telemetry-name">MISSION COMPLETION</span>
+        <strong id="progress-percent">0<span>%</span></strong>
+        <div class="dial-track"><span id="progress-bar"></span></div>
+        <div class="telemetry-foot"><span id="progress-completed">0 COMPLETE</span><span id="progress-total">0 TOTAL</span></div>
       </div>
-      <div class="progress-module">
-        <div class="progress-top"><span>MISSION PROGRESS</span><strong id="progress-percent">0%</strong></div>
-        <div class="progress-track"><span id="progress-bar"></span></div>
-        <div class="progress-bottom"><span id="progress-completed">0 COMPLETE</span><span id="progress-total">0 TOTAL</span></div>
+      <div class="side-readout"><span>CORE TEMP.</span><strong>32.4 <small>°C</small></strong><i></i></div>
+      <div class="side-readout"><span>MEMORY LINK</span><strong class="green-text">STABLE</strong><i></i></div>
+      <div class="side-note"><i class="bi bi-info-circle"></i><p>All tasks are stored locally on this terminal. No remote connection required.</p></div>
+      <div class="side-bottom">OPS / BUILD 02.6<br/>AUTHORIZED PERSONNEL ONLY</div>
+    </aside>
+
+    <section class="main-console">
+      <div class="page-heading">
+        <div><p class="overline">FLIGHT OPERATIONS <span>/</span> TASK REGISTER</p><h1>MISSION <em>BOARD</em></h1></div>
+        <div class="date-stamp"><span>CONTROL SECTOR</span><strong>02 <small>—</small> PERSONAL</strong></div>
       </div>
+
+      <section class="intake-module">
+        <div class="module-title"><span><i class="bi bi-plus-circle"></i> TASK INTAKE</span><span>INPUT / 01</span></div>
+        <form id="todo-form" class="intake-form">
+          <input type="text" id="todo-input" placeholder="Enter new operation..." maxlength="240" autocomplete="off" />
+          <button type="submit" class="add-button"><i class="bi bi-arrow-down-right"></i> LOG TASK</button>
+        </form>
+        <form id="edit-form" class="intake-form edit-form hide">
+          <input type="text" id="edit-input" placeholder="Update operation..." maxlength="240" />
+          <button type="submit" class="add-button"><i class="bi bi-check2"></i> SAVE CHANGES</button>
+          <button type="button" id="cancel-edit-btn" class="cancel-button">CANCEL</button>
+        </form>
+        <div class="intake-foot"><span>PRESS ENTER TO LOG</span><span class="amber-light">●</span><span>MAX. 240 CHARACTERS</span></div>
+      </section>
+
+      <section class="task-console">
+        <div class="task-heading">
+          <div><p class="overline">CURRENT OPERATIONS</p><h2>Task queue <span id="task-count">[ 00 ]</span></h2></div>
+          <div class="queue-status"><span class="live-dot"></span> RECEIVING DATA</div>
+        </div>
+        <div class="control-strip">
+          <label id="search" for="search-input"><i class="bi bi-search"></i><input type="search" id="search-input" placeholder="SEARCH OPERATIONS..." autocomplete="off" /><kbd>/</kbd></label>
+          <label id="filter" for="filter-select"><span>VIEW</span><select id="filter-select"><option value="all">ALL TASKS</option><option value="todo">PENDING</option><option value="done">COMPLETED</option></select></label>
+          <button id="erase-button" class="reset-search" type="button" aria-label="Clear search" title="Clear search"><i class="bi bi-x-lg"></i></button>
+        </div>
+        <div class="list-caption"><span>NO. / OPERATION DETAILS</span><span>STATUS &amp; CONTROLS</span></div>
+        <div id="todo-list" aria-live="polite"></div>
+        <div id="empty-state" class="empty-state" hidden><i class="bi bi-radar"></i><strong>NO ACTIVE OPERATIONS</strong><span>Log a new task to populate the mission board.</span></div>
+      </section>
+
+      <footer class="console-footer"><span><b>OPS DECK</b> / PERSONAL CONTROL SYSTEM</span><span>LOCAL DATA STORAGE <i class="bi bi-lock-fill"></i></span><span>END OF LOG_</span></footer>
     </section>
-
-    <section class="entry-panel">
-      <div class="panel-heading"><span><i class="bi bi-plus-square"></i> REGISTER NEW TASK</span><span class="panel-code">INPUT_CHANNEL_02</span></div>
-      <form id="todo-form" class="entry-form">
-        <i class="bi bi-terminal input-prefix" aria-hidden="true"></i>
-        <input type="text" id="todo-input" placeholder="Descreva a próxima tarefa..." maxlength="240" autocomplete="off" />
-        <button type="submit" class="primary-action"><i class="bi bi-plus-lg"></i><span>ADICIONAR</span></button>
-      </form>
-      <form id="edit-form" class="entry-form edit-form hide">
-        <i class="bi bi-pencil-square input-prefix" aria-hidden="true"></i>
-        <input type="text" id="edit-input" placeholder="Atualize a descrição..." maxlength="240" />
-        <button type="submit" class="primary-action"><i class="bi bi-check2"></i><span>SALVAR</span></button>
-        <button type="button" id="cancel-edit-btn" class="secondary-action">CANCELAR</button>
-      </form>
-      <p class="entry-hint"><span>ENTER</span> para registrar <b>•</b> tarefas armazenadas localmente neste navegador</p>
-    </section>
-
-    <section class="task-section">
-      <div class="section-heading">
-        <div><p class="eyebrow">DATABASE / ACTIVE QUEUE</p><h2>Operation list <span id="task-count">[ 00 ]</span></h2></div>
-        <div class="queue-indicator"><span></span> QUEUE ACTIVE</div>
-      </div>
-
-      <div class="toolbar">
-        <label id="search" for="search-input"><i class="bi bi-search"></i><input type="search" id="search-input" placeholder="LOCALIZAR TAREFA..." autocomplete="off" /><kbd>/</kbd></label>
-        <label id="filter" for="filter-select"><span>STATUS</span><select id="filter-select"><option value="all">Todas</option><option value="todo">Pendentes</option><option value="done">Concluídas</option></select></label>
-        <button id="erase-button" class="clear-search" type="button" aria-label="Limpar pesquisa" title="Limpar pesquisa"><i class="bi bi-x-lg"></i></button>
-      </div>
-
-      <div class="list-labels"><span>TASK DESCRIPTION</span><span>COMMANDS</span></div>
-      <div id="todo-list" aria-live="polite"></div>
-      <div id="empty-state" class="empty-state" hidden><i class="bi bi-inbox"></i><strong>NO TASKS IN QUEUE</strong><span>Registre uma tarefa para iniciar suas operações.</span></div>
-    </section>
-
-    <footer class="system-footer"><span>TASK CONSOLE <b>///</b> OPERATIONS MODULE</span><span>ALL DATA STORED LOCALLY <i class="bi bi-shield-check"></i></span><span>END OF TRANSMISSION_</span></footer>
   </main>
 </body>
 </html>
